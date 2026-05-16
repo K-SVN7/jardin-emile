@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Réservation — Le Jardin d'Émile, Restaurant à Malestroit</title>
+<meta name="description" content="Réservez votre table au Jardin d'Émile à Malestroit. Formulaire en ligne, confirmation écrite par notre équipe sous 24h.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blanc: #FAF7F2;
+  --blanc-pur: #FFFFFF;
+  --vert: #2C3E2D;
+  --vert-clair: #3D5440;
+  --vert-pale: #EEF1EE;
+  --terra: #C17A5A;
+  --texte: #1A1A1A;
+  --texte-doux: #555550;
+  --erreur: #C0392B;
+  --f-titre: 'Cormorant Garamond', serif;
+  --f-corps: 'Inter', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--blanc);
+  color: var(--texte);
+  font-family: var(--f-corps);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 72px;
+  background: rgba(250,247,242,0.96);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 1px 0 rgba(44,62,45,0.1);
+}
+
+.nav-logo {
+  font-family: var(--f-titre);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--vert);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--texte-doux);
+  transition: color 0.3s;
+}
+
+.nav-links a:hover { color: var(--terra); }
+.nav-links a.active { color: var(--terra); }
+
+.nav-reserver {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blanc) !important;
+  background: var(--terra);
+  padding: 10px 22px;
+  border: 1px solid var(--terra);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+
+.hamburger span {
+  width: 24px;
+  height: 1px;
+  background: var(--vert);
+  display: block;
+}
+
+.mob-menu {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--vert);
+  z-index: 99;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.mob-menu.open { display: flex; }
+
+.mob-menu a {
+  font-family: var(--f-titre);
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--blanc);
+  letter-spacing: 0.04em;
+  transition: color 0.3s;
+}
+
+.mob-menu a:hover { color: var(--terra); }
+
+.mob-close {
+  position: absolute;
+  top: 24px; right: 28px;
+  font-size: 32px;
+  color: var(--blanc);
+  cursor: pointer;
+  background: none;
+  border: none;
+  line-height: 1;
+  font-weight: 300;
+}
+
+.page-hero {
+  padding-top: 72px;
+  height: 48vh;
+  min-height: 300px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.page-hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(44,62,45,0.25), rgba(26,26,26,0.7));
+  z-index: 1;
+}
+
+.page-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 48px 52px;
+  max-width: 1140px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.page-hero-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(250,247,242,0.6);
+  margin-bottom: 12px;
+}
+
+.page-hero-titre {
+  font-family: var(--f-titre);
+  font-size: clamp(48px, 6vw, 80px);
+  font-weight: 300;
+  color: var(--blanc);
+  line-height: 1.0;
+}
+
+.page-hero-titre em { font-style: italic; }
+
+.reservation-wrap {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 0;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 80px 48px;
+  align-items: start;
+}
+
+.form-col { padding-right: 72px; }
+
+.form-header { margin-bottom: 48px; }
+
+.section-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-family: var(--f-titre);
+  font-size: clamp(34px, 3.5vw, 50px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--vert);
+  margin-bottom: 16px;
+}
+
+.section-title em { font-style: italic; }
+
+.trait {
+  width: 36px;
+  height: 1px;
+  background: var(--terra);
+  margin-bottom: 28px;
+}
+
+.form-intro {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--texte-doux);
+  line-height: 1.8;
+  margin-bottom: 8px;
+}
+
+.confirm-bandeau {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--vert-pale);
+  border-left: 2px solid var(--terra);
+  padding: 14px 18px;
+  margin-top: 20px;
+}
+
+.confirm-bandeau p {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--texte-doux);
+  letter-spacing: 0.03em;
+  line-height: 1.5;
+}
+
+.confirm-bandeau strong {
+  font-weight: 500;
+  color: var(--texte);
+}
+
+.confirm-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--terra);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.form-row.triple {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.form-row.full {
+  grid-template-columns: 1fr;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--texte-doux);
+}
+
+.form-label .required {
+  color: var(--terra);
+  margin-left: 3px;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  background: var(--blanc-pur);
+  border: 1px solid rgba(44,62,45,0.18);
+  padding: 13px 16px;
+  font-family: var(--f-corps);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--texte);
+  outline: none;
+  transition: border-color 0.3s;
+  border-radius: 0;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--vert);
+}
+
+.form-input.erreur,
+.form-select.erreur,
+.form-textarea.erreur {
+  border-color: var(--erreur);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder { color: rgba(85,85,80,0.4); }
+
+.form-select-wrap {
+  position: relative;
+}
+
+.form-select-wrap::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid var(--texte-doux);
+  pointer-events: none;
+}
+
+.form-select { cursor: pointer; padding-right: 36px; }
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.6;
+}
+
+.form-civilite {
+  display: flex;
+  gap: 24px;
+  padding-top: 4px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--texte-doux);
+  cursor: pointer;
+}
+
+.radio-label input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--vert);
+  cursor: pointer;
+}
+
+.msg-erreur {
+  font-size: 11px;
+  color: var(--erreur);
+  letter-spacing: 0.04em;
+  display: none;
+}
+
+.form-group.has-error .msg-erreur { display: block; }
+
+.form-rgpd {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 28px 0;
+  padding: 20px;
+  background: var(--blanc-pur);
+  border: 1px solid rgba(44,62,45,0.1);
+}
+
+.form-rgpd input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: var(--vert);
+  cursor: pointer;
+}
+
+.form-rgpd label {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--texte-doux);
+  line-height: 1.6;
+  cursor: pointer;
+}
+
+.form-rgpd label .required { color: var(--terra); }
+
+.btn-submit {
+  width: 100%;
+  background: var(--vert);
+  color: var(--blanc);
+  border: 1px solid var(--vert);
+  padding: 16px 32px;
+  font-family: var(--f-corps);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background: var(--terra);
+  border-color: var(--terra);
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-submit .spinner {
+  width: 16px;
+  height: 16px;
+  border: 1px solid rgba(250,247,242,0.4);
+  border-top-color: var(--blanc);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: none;
+}
+
+.btn-submit.loading .spinner { display: block; }
+.btn-submit.loading .btn-text { display: none; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.infos-col {
+  position: sticky;
+  top: 96px;
+}
+
+.infos-bloc {
+  background: var(--vert);
+  padding: 40px 36px;
+  margin-bottom: 2px;
+}
+
+.infos-bloc-titre {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(250,247,242,0.45);
+  margin-bottom: 20px;
+}
+
+.info-ligne { margin-bottom: 20px; }
+.info-ligne:last-child { margin-bottom: 0; }
+
+.info-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(250,247,242,0.4);
+  margin-bottom: 4px;
+}
+
+.info-valeur {
+  font-family: var(--f-titre);
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--blanc);
+  line-height: 1.4;
+}
+
+.infos-note {
+  background: var(--vert-pale);
+  padding: 28px 32px;
+  border-left: 2px solid var(--terra);
+}
+
+.infos-note p {
+  font-family: var(--f-titre);
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--texte);
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+
+.infos-note span {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--terra);
+}
+
+.confirmation-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(44,62,45,0.6);
+  backdrop-filter: blur(4px);
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.confirmation-overlay.visible { display: flex; }
+
+.confirmation-modal {
+  background: var(--blanc);
+  max-width: 520px;
+  width: 100%;
+  padding: 56px 48px;
+  text-align: center;
+  position: relative;
+  animation: modalIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.confirmation-check {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--vert-pale);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 28px;
+}
+
+.check-svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--vert);
+  stroke-width: 2;
+  fill: none;
+  stroke-dasharray: 30;
+  stroke-dashoffset: 30;
+  animation: drawCheck 0.5s 0.3s ease forwards;
+}
+
+@keyframes drawCheck {
+  to { stroke-dashoffset: 0; }
+}
+
+.confirmation-titre {
+  font-family: var(--f-titre);
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--vert);
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.confirmation-titre em { font-style: italic; }
+
+.confirmation-texte {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--texte-doux);
+  line-height: 1.75;
+  margin-bottom: 10px;
+}
+
+.confirmation-important {
+  background: var(--vert-pale);
+  border-left: 2px solid var(--terra);
+  padding: 14px 18px;
+  margin: 24px 0;
+  text-align: left;
+}
+
+.confirmation-important p {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--texte);
+  line-height: 1.6;
+}
+
+.confirmation-important strong { color: var(--vert); font-weight: 500; }
+
+.btn-confirmation {
+  display: inline-block;
+  background: var(--vert);
+  color: var(--blanc);
+  border: 1px solid var(--vert);
+  padding: 13px 32px;
+  font-family: var(--f-corps);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.3s;
+  margin-top: 8px;
+}
+
+.btn-confirmation:hover { background: var(--terra); border-color: var(--terra); }
+
+.trait-deco {
+  width: 36px;
+  height: 1px;
+  background: var(--terra);
+  margin: 20px auto;
+}
+
+footer {
+  background: var(--vert);
+  padding: 56px 48px 32px;
+}
+
+.footer-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(250,247,242,0.1);
+  margin-bottom: 28px;
+}
+
+.footer-logo {
+  font-family: var(--f-titre);
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--blanc);
+  margin-bottom: 14px;
+}
+
+.footer-tagline {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(250,247,242,0.45);
+  line-height: 1.7;
+}
+
+.footer-col-titre {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(250,247,242,0.35);
+  margin-bottom: 18px;
+}
+
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 10px; }
+
+.footer-links a {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(250,247,242,0.6);
+  transition: color 0.3s;
+}
+
+.footer-links a:hover { color: var(--terra); }
+
+.footer-bottom {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-copy {
+  font-size: 11px;
+  font-weight: 300;
+  color: rgba(250,247,242,0.25);
+  letter-spacing: 0.05em;
+}
+
+.footer-copy a { color: rgba(250,247,242,0.35); transition: color 0.3s; }
+.footer-copy a:hover { color: var(--terra); }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: opacity, transform;
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 1024px) {
+  nav { padding: 0 28px; }
+  .reservation-wrap { grid-template-columns: 1fr; padding: 60px 28px; }
+  .form-col { padding-right: 0; margin-bottom: 48px; }
+  .infos-col { position: static; }
+  .infos-bloc, .infos-note { display: inline-block; width: 100%; }
+  .page-hero-content { padding: 0 28px 48px; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  nav { padding: 0 20px; height: 60px; }
+  .nav-links { display: none; }
+  .nav-reserver { display: none; }
+  .hamburger { display: flex; }
+  .page-hero-content { padding: 0 20px 40px; }
+  .reservation-wrap { padding: 48px 20px; }
+  .form-row { grid-template-columns: 1fr; }
+  .form-row.triple { grid-template-columns: 1fr 1fr; }
+  .confirmation-modal { padding: 40px 28px; }
+  .footer-inner { grid-template-columns: 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+  footer { padding: 48px 20px 28px; }
+}
+
+@media (max-width: 480px) {
+  .form-row.triple { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Le Jardin d'Émile</a>
+  <ul class="nav-links">
+    <li><a href="index.html#actus">Actualités</a></li>
+    <li><a href="index.html#formules">Formules</a></li>
+    <li><a href="menus.html">Menus</a></li>
+    <li><a href="index.html#localisation">Nous trouver</a></li>
+    <li><a href="reservation.html" class="active nav-reserver">Réserver</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" id="mobClose" aria-label="Fermer le menu">&times;</button>
+  <a href="index.html#actus">Actualités</a>
+  <a href="index.html#formules">Formules</a>
+  <a href="menus.html">Menus</a>
+  <a href="index.html#localisation">Nous trouver</a>
+  <a href="reservation.html">Réserver</a>
+</div>
+
+<div class="page-hero">
+  <img class="page-hero-img" src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=1400&q=85" alt="Salle du Jardin d'Émile" width="1400" height="600">
+  <div class="page-hero-content">
+    <p class="page-hero-label">Garantissez votre soirée</p>
+    <h1 class="page-hero-titre">Réserver <em>une table</em></h1>
+  </div>
+</div>
+
+<div class="reservation-wrap">
+  <div class="form-col">
+    <div class="form-header reveal">
+      <p class="section-label">Formulaire de réservation</p>
+      <h2 class="section-title">Votre <em>demande</em></h2>
+      <div class="trait"></div>
+      <p class="form-intro">Renseignez vos informations ci-dessous. Nous confirmons chaque réservation par écrit — aucune table n'est garantie sans cette confirmation.</p>
+      <div class="confirm-bandeau">
+        <svg class="confirm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
+        </svg>
+        <p><strong>Réservation sous confirmation écrite.</strong> Votre demande sera traitée par notre équipe. Vous recevrez un email de confirmation dans les 24h.</p>
+      </div>
+    </div>
+
+    <form id="reservationForm" action="https://formspree.io/f/VOTRE_ID_FORMSPREE" method="POST" novalidate>
+
+      <div class="form-row reveal">
+        <div class="form-group" id="grp-civilite">
+          <span class="form-label">Civilité <span class="required">*</span></span>
+          <div class="form-civilite">
+            <label class="radio-label">
+              <input type="radio" name="civilite" value="Mme" required> Mme
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="civilite" value="M."> M.
+            </label>
+          </div>
+          <span class="msg-erreur">Veuillez sélectionner une civilité.</span>
+        </div>
+      </div>
+
+      <div class="form-row reveal">
+        <div class="form-group" id="grp-nom">
+          <label class="form-label" for="nom">Nom <span class="required">*</span></label>
+          <input class="form-input" type="text" id="nom" name="nom" placeholder="Votre nom" autocomplete="family-name" required>
+          <span class="msg-erreur">Veuillez renseigner votre nom.</span>
+        </div>
+        <div class="form-group" id="grp-prenom">
+          <label class="form-label" for="prenom">Prénom <span class="required">*</span></label>
+          <input class="form-input" type="text" id="prenom" name="prenom" placeholder="Votre prénom" autocomplete="given-name" required>
+          <span class="msg-erreur">Veuillez renseigner votre prénom.</span>
+        </div>
+      </div>
+
+      <div class="form-row reveal">
+        <div class="form-group" id="grp-email">
+          <label class="form-label" for="email">Email <span class="required">*</span></label>
+          <input class="form-input" type="email" id="email" name="email" placeholder="votre@email.fr" autocomplete="email" required>
+          <span class="msg-erreur">Veuillez renseigner un email valide.</span>
+        </div>
+        <div class="form-group" id="grp-telephone">
+          <label class="form-label" for="telephone">Téléphone <span class="required">*</span></label>
+          <input class="form-input" type="tel" id="telephone" name="telephone" placeholder="06 xx xx xx xx" autocomplete="tel" required>
+          <span class="msg-erreur">Veuillez renseigner votre téléphone.</span>
+        </div>
+      </div>
+
+      <div class="form-row triple reveal">
+        <div class="form-group" id="grp-date">
+          <label class="form-label" for="date">Date <span class="required">*</span></label>
+          <input class="form-input" type="date" id="date" name="date" required>
+          <span class="msg-erreur">Veuillez choisir une date.</span>
+        </div>
+        <div class="form-group" id="grp-heure">
+          <label class="form-label" for="heure">Heure <span class="required">*</span></label>
+          <div class="form-select-wrap">
+            <select class="form-select" id="heure" name="heure" required>
+              <option value="">— Choisir —</option>
+              <optgroup label="Déjeuner">
+                <option value="12:00">12h00</option>
+                <option value="12:30">12h30</option>
+                <option value="13:00">13h00</option>
+                <option value="13:30">13h30</option>
+              </optgroup>
+              <optgroup label="Dîner">
+                <option value="19:00">19h00</option>
+                <option value="19:30">19h30</option>
+                <option value="20:00">20h00</option>
+                <option value="20:30">20h30</option>
+                <option value="21:00">21h00</option>
+              </optgroup>
+            </select>
+          </div>
+          <span class="msg-erreur">Veuillez choisir une heure.</span>
+        </div>
+        <div class="form-group" id="grp-couverts">
+          <label class="form-label" for="couverts">Nb. personnes <span class="required">*</span></label>
+          <div class="form-select-wrap">
+            <select class="form-select" id="couverts" name="couverts" required>
+              <option value="">— Choisir —</option>
+              <option value="1">1 personne</option>
+              <option value="2">2 personnes</option>
+              <option value="3">3 personnes</option>
+              <option value="4">4 personnes</option>
+              <option value="5">5 personnes</option>
+              <option value="6">6 personnes</option>
+              <option value="7+">7 personnes et plus</option>
+            </select>
+          </div>
+          <span class="msg-erreur">Veuillez indiquer le nombre de couverts.</span>
+        </div>
+      </div>
+
+      <div class="form-row reveal">
+        <div class="form-group" id="grp-formule">
+          <label class="form-label" for="formule">Formule souhaitée</label>
+          <div class="form-select-wrap">
+            <select class="form-select" id="formule" name="formule">
+              <option value="">— Sans préférence —</option>
+              <option value="La Brasserie (18€)">La Brasserie — 18€</option>
+              <option value="Le Jardin (38€)">Le Jardin — 38€</option>
+              <option value="Le Prestige (58€)">Le Prestige — 58€</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="occasion">Occasion particulière</label>
+          <div class="form-select-wrap">
+            <select class="form-select" id="occasion" name="occasion">
+              <option value="">— Aucune —</option>
+              <option value="Anniversaire">Anniversaire</option>
+              <option value="Repas d'affaires">Repas d'affaires</option>
+              <option value="Romantique">Dîner romantique</option>
+              <option value="Célébration">Célébration</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row full reveal">
+        <div class="form-group">
+          <label class="form-label" for="precisions">Précisions & demandes particulières</label>
+          <textarea class="form-textarea" id="precisions" name="precisions" placeholder="Allergies, régimes alimentaires, besoins particuliers…"></textarea>
+        </div>
+      </div>
+
+      <div class="form-rgpd reveal">
+        <input type="checkbox" id="rgpd" name="rgpd" required>
+        <label for="rgpd">
+          J'accepte que Le Jardin d'Émile collecte et utilise les données personnelles renseignées dans ce formulaire dans le cadre exclusif de la gestion de ma réservation. Ces informations sont conservées pendant une durée de 3 ans. <span class="required">*</span>
+        </label>
+      </div>
+
+      <button type="submit" class="btn-submit reveal" id="btnSubmit">
+        <span class="btn-text">Envoyer ma demande de réservation →</span>
+        <span class="spinner"></span>
+      </button>
+
+    </form>
+  </div>
+
+  <div class="infos-col reveal">
+    <div class="infos-bloc">
+      <p class="infos-bloc-titre">Informations pratiques</p>
+      <div class="info-ligne">
+        <p class="info-label">Adresse</p>
+        <p class="info-valeur">12 Place du Bouffay<br>56140 Malestroit</p>
+      </div>
+      <div class="info-ligne">
+        <p class="info-label">Téléphone</p>
+        <p class="info-valeur"><a href="tel:0297750000" style="color:var(--blanc);">02 97 75 XX XX</a></p>
+      </div>
+      <div class="info-ligne">
+        <p class="info-label">Horaires déjeuner</p>
+        <p class="info-valeur">Mer – Ven : 12h – 14h<br>Sam – Dim : 12h – 14h30</p>
+      </div>
+      <div class="info-ligne">
+        <p class="info-label">Horaires dîner</p>
+        <p class="info-valeur">Mer – Ven : 19h – 21h30<br>Sam – Dim : 19h – 22h</p>
+      </div>
+      <div class="info-ligne">
+        <p class="info-label">Fermeture</p>
+        <p class="info-valeur">Lundi & Mardi</p>
+      </div>
+    </div>
+    <div class="infos-note">
+      <p>Le Prestige est disponible uniquement sur réservation, minimum 48h à l'avance. Pour les groupes de 7 personnes et plus, contactez-nous directement par téléphone.</p>
+      <span>— L'équipe du Jardin d'Émile</span>
+    </div>
+  </div>
+</div>
+
+<div class="confirmation-overlay" id="confirmationOverlay">
+  <div class="confirmation-modal">
+    <div class="confirmation-check">
+      <svg class="check-svg" viewBox="0 0 24 24">
+        <polyline points="4,12 9,17 20,6"/>
+      </svg>
+    </div>
+    <h2 class="confirmation-titre">Demande <em>envoyée</em></h2>
+    <div class="trait-deco"></div>
+    <p class="confirmation-texte">Merci pour votre demande de réservation au Jardin d'Émile. Nous l'avons bien reçue.</p>
+    <div class="confirmation-important">
+      <p><strong>Votre table n'est pas encore confirmée.</strong> Notre équipe vous contactera par email dans les 24h pour valider votre réservation par écrit.</p>
+    </div>
+    <p class="confirmation-texte" style="font-size:13px;">Pour toute question urgente, vous pouvez nous joindre au <a href="tel:0297750000" style="color:var(--vert); border-bottom:1px solid var(--vert);">02 97 75 XX XX</a>.</p>
+    <button class="btn-confirmation" id="btnFermerConfirmation">Retour à l'accueil</button>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <p class="footer-logo">Le Jardin d'Émile</p>
+      <p class="footer-tagline">Cuisine de saison au cœur de Malestroit.<br>Producteurs bretons, assiettes sincères.</p>
+    </div>
+    <div>
+      <p class="footer-col-titre">Navigation</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="menus.html">Menus</a></li>
+        <li><a href="reservation.html">Réserver</a></li>
+        <li><a href="index.html#localisation">Nous trouver</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-titre">Contact</p>
+      <ul class="footer-links">
+        <li><a href="tel:0297750000">02 97 75 XX XX</a></li>
+        <li><a href="mailto:contact@jardindémile.fr">contact@jardindémile.fr</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Le Jardin d'Émile — Tous droits réservés</p>
+    <p class="footer-copy">Site réalisé par <a href="https://comeup.com/fr/@s7vnstudio">Amiri Studio</a></p>
+  </div>
+</footer>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const mobMenu = document.getElementById('mobMenu');
+const mobClose = document.getElementById('mobClose');
+hamburger.addEventListener('click', () => mobMenu.classList.add('open'));
+mobClose.addEventListener('click', () => mobMenu.classList.remove('open'));
+mobMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => mobMenu.classList.remove('open')));
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+const today = new Date().toISOString().split('T')[0];
+document.getElementById('date').setAttribute('min', today);
+
+function validerChamp(input) {
+  const grp = input.closest('.form-group');
+  if (!grp) return true;
+  const valid = input.checkValidity() && input.value.trim() !== '';
+  grp.classList.toggle('has-error', !valid);
+  input.classList.toggle('erreur', !valid);
+  return valid;
+}
+
+function validerCivilite() {
+  const checked = document.querySelector('input[name="civilite"]:checked');
+  const grp = document.getElementById('grp-civilite');
+  const ok = !!checked;
+  grp.classList.toggle('has-error', !ok);
+  return ok;
+}
+
+function validerRgpd() {
+  const cb = document.getElementById('rgpd');
+  return cb.checked;
+}
+
+document.querySelectorAll('.form-input, .form-select, .form-textarea').forEach(el => {
+  el.addEventListener('blur', () => validerChamp(el));
+  el.addEventListener('input', () => {
+    if (el.closest('.form-group').classList.contains('has-error')) validerChamp(el);
+  });
+});
+
+document.querySelectorAll('input[name="civilite"]').forEach(r => {
+  r.addEventListener('change', validerCivilite);
+});
+
+const form = document.getElementById('reservationForm');
+const btnSubmit = document.getElementById('btnSubmit');
+const overlay = document.getElementById('confirmationOverlay');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  let ok = true;
+
+  if (!validerCivilite()) ok = false;
+
+  ['nom','prenom','email','telephone','date','heure','couverts'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!validerChamp(el)) ok = false;
+  });
+
+  if (!validerRgpd()) {
+    ok = false;
+    document.getElementById('rgpd').style.outline = '2px solid #C0392B';
+  } else {
+    document.getElementById('rgpd').style.outline = '';
+  }
+
+  if (!ok) {
+    const firstErr = form.querySelector('.has-error, .erreur');
+    if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  btnSubmit.classList.add('loading');
+  btnSubmit.disabled = true;
+
+  try {
+    const data = new FormData(form);
+    const resp = await fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (resp.ok) {
+      form.reset();
+      overlay.classList.add('visible');
+      document.body.style.overflow = 'hidden';
+    } else {
+      alert('Une erreur est survenue. Merci de réessayer ou de nous contacter directement par téléphone.');
+    }
+  } catch (err) {
+    alert('Connexion impossible. Merci de vérifier votre connexion internet et réessayer.');
+  } finally {
+    btnSubmit.classList.remove('loading');
+    btnSubmit.disabled = false;
+  }
+});
+
+document.getElementById('btnFermerConfirmation').addEventListener('click', () => {
+  overlay.classList.remove('visible');
+  document.body.style.overflow = '';
+  window.location.href = 'index.html';
+});
+
+overlay.addEventListener('click', (e) => {
+  if (e.target === overlay) {
+    overlay.classList.remove('visible');
+    document.body.style.overflow = '';
+  }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Jardin d'Émile — Restaurant gastronomique à Malestroit</title>
+<meta name="description" content="Restaurant gastronomique au cœur de Malestroit. Cuisine de saison, produits locaux, cadre intimiste. Réservez votre table en ligne.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blanc: #FAF7F2;
+  --blanc-pur: #FFFFFF;
+  --vert: #2C3E2D;
+  --vert-clair: #3D5440;
+  --vert-pale: #EEF1EE;
+  --terra: #C17A5A;
+  --texte: #1A1A1A;
+  --texte-doux: #555550;
+  --f-titre: 'Cormorant Garamond', serif;
+  --f-corps: 'Inter', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--blanc);
+  color: var(--texte);
+  font-family: var(--f-corps);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 72px;
+  transition: background 0.4s, box-shadow 0.4s;
+}
+
+nav.scrolled {
+  background: rgba(250,247,242,0.96);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 1px 0 rgba(44,62,45,0.1);
+}
+
+.nav-logo {
+  font-family: var(--f-titre);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--blanc);
+  transition: color 0.4s;
+}
+
+nav.scrolled .nav-logo { color: var(--vert); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--f-corps);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(250,247,242,0.85);
+  transition: color 0.3s;
+}
+
+nav.scrolled .nav-links a { color: var(--texte-doux); }
+.nav-links a:hover { color: var(--terra) !important; }
+
+.nav-reserver {
+  font-family: var(--f-corps);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blanc) !important;
+  background: var(--vert);
+  padding: 10px 22px;
+  border: 1px solid var(--vert);
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.nav-reserver:hover {
+  background: var(--terra) !important;
+  border-color: var(--terra) !important;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+
+.hamburger span {
+  width: 24px;
+  height: 1px;
+  background: var(--blanc);
+  transition: background 0.4s;
+  display: block;
+}
+
+nav.scrolled .hamburger span { background: var(--vert); }
+
+.mob-menu {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--vert);
+  z-index: 99;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.mob-menu.open { display: flex; }
+
+.mob-menu a {
+  font-family: var(--f-titre);
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--blanc);
+  letter-spacing: 0.04em;
+  transition: color 0.3s;
+}
+
+.mob-menu a:hover { color: var(--terra); }
+
+.mob-close {
+  position: absolute;
+  top: 24px; right: 28px;
+  font-size: 32px;
+  color: var(--blanc);
+  cursor: pointer;
+  background: none;
+  border: none;
+  line-height: 1;
+  font-weight: 300;
+}
+
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 640px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.hero-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(26,26,26,0.2) 0%, rgba(26,26,26,0.6) 100%);
+  z-index: 1;
+  transition: background 0.4s;
+}
+
+.hero-panel:hover::before {
+  background: linear-gradient(to bottom, rgba(44,62,45,0.3) 0%, rgba(44,62,45,0.7) 100%);
+}
+
+.hero-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.hero-panel:hover img { transform: scale(1.04); }
+
+.hero-panel-content {
+  position: absolute;
+  bottom: 48px;
+  left: 28px;
+  right: 28px;
+  z-index: 2;
+}
+
+.hero-label {
+  font-family: var(--f-corps);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(250,247,242,0.65);
+  margin-bottom: 10px;
+}
+
+.hero-title {
+  font-family: var(--f-titre);
+  font-size: clamp(22px, 2.2vw, 34px);
+  font-weight: 300;
+  color: var(--blanc);
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+
+.hero-text {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(250,247,242,0.8);
+  line-height: 1.6;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.4s, max-height 0.4s;
+}
+
+.hero-panel:hover .hero-text {
+  opacity: 1;
+  max-height: 80px;
+}
+
+.hero-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blanc);
+  margin-top: 14px;
+  border-bottom: 1px solid rgba(250,247,242,0.35);
+  padding-bottom: 2px;
+  transition: color 0.3s, border-color 0.3s;
+  opacity: 0;
+  transition: opacity 0.4s 0.1s, color 0.3s, border-color 0.3s;
+}
+
+.hero-panel:hover .hero-link { opacity: 1; }
+.hero-link:hover { color: var(--terra); border-color: var(--terra); }
+
+.hero-sep {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: rgba(250,247,242,0.15);
+  z-index: 3;
+}
+
+.sep1 { left: 25%; }
+.sep2 { left: 50%; }
+.sep3 { left: 75%; }
+
+section { padding: 96px 0; }
+.container { max-width: 1140px; margin: 0 auto; padding: 0 48px; }
+
+.section-label {
+  font-family: var(--f-corps);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-family: var(--f-titre);
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--vert);
+  margin-bottom: 20px;
+}
+
+.section-title em { font-style: italic; }
+
+.trait {
+  width: 36px;
+  height: 1px;
+  background: var(--terra);
+  margin-bottom: 40px;
+}
+
+.actus-section { background: var(--blanc); }
+
+.actus-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 48px;
+}
+
+.actus-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  background: rgba(44,62,45,0.1);
+  border: 1px solid rgba(44,62,45,0.1);
+}
+
+.actu-card {
+  background: var(--blanc);
+  padding: 36px 32px;
+  transition: background 0.3s;
+}
+
+.actu-card:hover { background: var(--vert-pale); }
+
+.actu-card.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 160px;
+  color: var(--texte-doux);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  font-style: italic;
+  grid-column: 1 / -1;
+}
+
+.actu-date {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--terra);
+  margin-bottom: 12px;
+}
+
+.actu-titre {
+  font-family: var(--f-titre);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--vert);
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.actu-texte {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--texte-doux);
+  line-height: 1.7;
+}
+
+.actu-vide {
+  text-align: center;
+  padding: 48px 32px;
+  grid-column: 1 / -1;
+  color: var(--texte-doux);
+  font-size: 16px;
+  font-style: italic;
+  font-family: var(--f-titre);
+}
+
+.horaires-section {
+  background: var(--vert);
+  padding: 80px 0;
+}
+
+.horaires-section .section-label { color: rgba(250,247,242,0.45); }
+.horaires-section .section-title { color: var(--blanc); }
+.horaires-section .trait { background: rgba(250,247,242,0.2); }
+
+.horaires-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 48px;
+}
+
+.horaire-bloc {
+  border-top: 1px solid rgba(250,247,242,0.12);
+  padding-top: 24px;
+}
+
+.horaire-jour {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(250,247,242,0.45);
+  margin-bottom: 12px;
+}
+
+.horaire-heure {
+  font-family: var(--f-titre);
+  font-size: 26px;
+  font-weight: 300;
+  color: var(--blanc);
+  line-height: 1.3;
+}
+
+.horaire-ferme {
+  font-family: var(--f-titre);
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(250,247,242,0.3);
+}
+
+.formules-section { background: var(--blanc-pur); }
+
+.formules-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 56px;
+}
+
+.formules-intro-text {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--texte-doux);
+  line-height: 1.85;
+}
+
+.formules-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border: 1px solid rgba(44,62,45,0.1);
+}
+
+.formule-card {
+  padding: 40px 36px;
+  border-right: 1px solid rgba(44,62,45,0.1);
+  transition: background 0.3s;
+}
+
+.formule-card:last-child { border-right: none; }
+.formule-card:not(.featured):hover { background: var(--vert-pale); }
+
+.formule-card.featured { background: var(--vert); }
+
+.formule-card.featured .formule-nom,
+.formule-card.featured .formule-prix { color: var(--blanc); }
+
+.formule-card.featured .formule-desc { color: rgba(250,247,242,0.7); }
+.formule-card.featured .formule-services li { color: rgba(250,247,242,0.65); border-bottom-color: rgba(250,247,242,0.08); }
+
+.formule-tag {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 20px;
+}
+
+.formule-nom {
+  font-family: var(--f-titre);
+  font-size: 30px;
+  font-weight: 300;
+  color: var(--vert);
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+
+.formule-prix {
+  font-family: var(--f-titre);
+  font-size: 40px;
+  font-weight: 300;
+  color: var(--vert);
+  margin-bottom: 20px;
+  line-height: 1.1;
+}
+
+.formule-prix span { font-size: 15px; opacity: 0.55; }
+
+.formule-desc {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--texte-doux);
+  line-height: 1.75;
+  margin-bottom: 24px;
+}
+
+.formule-services {
+  list-style: none;
+  margin-bottom: 32px;
+}
+
+.formule-services li {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--texte-doux);
+  padding: 7px 0 7px 14px;
+  position: relative;
+  border-bottom: 1px solid rgba(44,62,45,0.07);
+}
+
+.formule-services li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--terra);
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--f-corps);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-vert { background: var(--vert); color: var(--blanc); border: 1px solid var(--vert); }
+.btn-vert:hover { background: var(--terra); border-color: var(--terra); }
+
+.btn-outline { background: transparent; color: var(--blanc); border: 1px solid rgba(250,247,242,0.4); }
+.btn-outline:hover { background: var(--blanc); color: var(--vert); border-color: var(--blanc); }
+
+.btn-outline-vert { background: transparent; color: var(--vert); border: 1px solid var(--vert); }
+.btn-outline-vert:hover { background: var(--vert); color: var(--blanc); }
+
+.galerie-section { overflow: hidden; }
+
+.galerie-strip {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  height: 460px;
+}
+
+.galerie-item { overflow: hidden; }
+
+.galerie-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.galerie-item:hover img { transform: scale(1.05); }
+
+.presentation-section { background: var(--blanc); }
+
+.presentation-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 96px;
+  align-items: center;
+}
+
+.presentation-img-wrap { position: relative; }
+
+.presentation-img-wrap::before {
+  content: '';
+  position: absolute;
+  top: -14px; left: -14px;
+  right: 14px; bottom: 14px;
+  border: 1px solid rgba(44,62,45,0.13);
+  z-index: 0;
+}
+
+.presentation-img-wrap img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 460px;
+  object-fit: cover;
+}
+
+.presentation-texte {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--texte-doux);
+  line-height: 1.85;
+  margin-bottom: 20px;
+}
+
+.avis-section { background: var(--vert-pale); padding: 80px 0; }
+
+.avis-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  margin-top: 48px;
+}
+
+.avis-card { background: var(--blanc); padding: 32px 28px; }
+
+.avis-etoiles { display: flex; gap: 3px; margin-bottom: 16px; }
+
+.etoile {
+  width: 11px; height: 11px;
+  background: var(--terra);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.avis-texte {
+  font-family: var(--f-titre);
+  font-size: 17px;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--texte);
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.avis-auteur {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--texte-doux);
+}
+
+.localisation-section { }
+
+.localisation-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 440px;
+}
+
+.localisation-infos {
+  background: var(--vert);
+  padding: 64px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.localisation-infos .section-label { color: rgba(250,247,242,0.45); }
+.localisation-infos .section-title { color: var(--blanc); font-size: 40px; }
+.localisation-infos .trait { background: rgba(250,247,242,0.2); }
+
+.info-ligne { margin-bottom: 24px; }
+
+.info-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(250,247,242,0.4);
+  margin-bottom: 4px;
+}
+
+.info-valeur {
+  font-family: var(--f-titre);
+  font-size: 19px;
+  font-weight: 300;
+  color: var(--blanc);
+  line-height: 1.4;
+}
+
+.localisation-carte { background: #ccc; }
+
+.localisation-carte iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.cta-section {
+  background: var(--blanc-pur);
+  text-align: center;
+  padding: 96px 48px;
+}
+
+.cta-titre {
+  font-family: var(--f-titre);
+  font-size: clamp(42px, 5vw, 70px);
+  font-weight: 300;
+  color: var(--vert);
+  line-height: 1.05;
+  margin-bottom: 18px;
+}
+
+.cta-sous {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--texte-doux);
+  margin-bottom: 32px;
+  letter-spacing: 0.04em;
+}
+
+.cta-note {
+  display: block;
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--texte-doux);
+  margin-top: 14px;
+  letter-spacing: 0.06em;
+  font-style: italic;
+}
+
+footer {
+  background: var(--vert);
+  padding: 56px 48px 32px;
+}
+
+.footer-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(250,247,242,0.1);
+  margin-bottom: 28px;
+}
+
+.footer-logo {
+  font-family: var(--f-titre);
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--blanc);
+  margin-bottom: 14px;
+}
+
+.footer-tagline {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(250,247,242,0.45);
+  line-height: 1.7;
+}
+
+.footer-col-titre {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(250,247,242,0.35);
+  margin-bottom: 18px;
+}
+
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 10px; }
+
+.footer-links a {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(250,247,242,0.6);
+  transition: color 0.3s;
+}
+
+.footer-links a:hover { color: var(--terra); }
+
+.footer-bottom {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-copy {
+  font-size: 11px;
+  font-weight: 300;
+  color: rgba(250,247,242,0.25);
+  letter-spacing: 0.05em;
+}
+
+.footer-copy a {
+  color: rgba(250,247,242,0.35);
+  transition: color 0.3s;
+}
+
+.footer-copy a:hover { color: var(--terra); }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: opacity, transform;
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 1024px) {
+  nav { padding: 0 28px; }
+  .container { padding: 0 28px; }
+  .hero { grid-template-columns: 1fr 1fr; }
+  .hero-panel:nth-child(5),
+  .hero-panel:nth-child(6) { display: none; }
+  .sep2 { display: none; }
+  .sep3 { display: none; }
+  .horaires-grid { grid-template-columns: 1fr 1fr; }
+  .formules-grid { grid-template-columns: 1fr 1fr; }
+  .formule-card:last-child { grid-column: span 2; border-right: none; border-top: 1px solid rgba(44,62,45,0.1); }
+  .formules-intro { grid-template-columns: 1fr; gap: 24px; }
+  .presentation-inner { grid-template-columns: 1fr; gap: 48px; }
+  .presentation-img-wrap { display: none; }
+  .galerie-strip { grid-template-columns: 1fr 1fr; }
+  .galerie-item:nth-child(3),
+  .galerie-item:nth-child(4) { display: none; }
+  .avis-grid { grid-template-columns: 1fr 1fr; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  section { padding: 60px 0; }
+  nav { padding: 0 20px; height: 60px; }
+  .container { padding: 0 20px; }
+  .nav-links { display: none; }
+  .nav-reserver { display: none; }
+  .hamburger { display: flex; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-panel:not(:first-child) { display: none; }
+  .hero-text { opacity: 1; max-height: 100px; }
+  .hero-link { opacity: 1; }
+  .sep1, .sep2, .sep3 { display: none; }
+  .actus-grid { grid-template-columns: 1fr; }
+  .horaires-grid { grid-template-columns: 1fr; gap: 20px; }
+  .formules-grid { grid-template-columns: 1fr; }
+  .formule-card { border-right: none; border-bottom: 1px solid rgba(44,62,45,0.1); }
+  .formule-card:last-child { grid-column: span 1; border-bottom: none; }
+  .galerie-strip { grid-template-columns: 1fr; height: 260px; }
+  .galerie-item:not(:first-child) { display: none; }
+  .avis-grid { grid-template-columns: 1fr; }
+  .localisation-inner { grid-template-columns: 1fr; }
+  .localisation-infos { padding: 48px 28px; }
+  .localisation-carte { height: 280px; }
+  .footer-inner { grid-template-columns: 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+  .actus-header { flex-direction: column; align-items: flex-start; gap: 14px; }
+  footer { padding: 48px 20px 28px; }
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Le Jardin d'Émile</a>
+  <ul class="nav-links">
+    <li><a href="#actus">Actualités</a></li>
+    <li><a href="#formules">Formules</a></li>
+    <li><a href="menus.html">Menus</a></li>
+    <li><a href="#localisation">Nous trouver</a></li>
+    <li><a href="reservation.html" class="nav-reserver">Réserver</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" id="mobClose" aria-label="Fermer le menu">&times;</button>
+  <a href="#actus">Actualités</a>
+  <a href="#formules">Formules</a>
+  <a href="menus.html">Menus</a>
+  <a href="#localisation">Nous trouver</a>
+  <a href="reservation.html">Réserver</a>
+</div>
+
+<div class="hero">
+  <div class="hero-sep sep1"></div>
+  <div class="hero-sep sep2"></div>
+  <div class="hero-sep sep3"></div>
+
+  <div class="hero-panel">
+    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Salle du restaurant Le Jardin d'Émile à Malestroit" width="800" height="1200">
+    <div class="hero-panel-content">
+      <p class="hero-label">Notre histoire</p>
+      <h1 class="hero-title">Le Jardin<br><em>d'Émile</em></h1>
+      <p class="hero-text">Une cuisine de passion, ancrée dans les saisons et les producteurs bretons.</p>
+      <a href="#presentation-section" class="hero-link">Découvrir →</a>
+    </div>
+  </div>
+
+  <div class="hero-panel">
+    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80" alt="Cadre intimiste du restaurant Jardin d'Émile" width="800" height="1200">
+    <div class="hero-panel-content">
+      <p class="hero-label">Au cœur de Malestroit</p>
+      <h2 class="hero-title">Un cadre<br>d'exception</h2>
+      <p class="hero-text">Niché dans les ruelles médiévales, un espace chaleureux et singulier pour une vingtaine de couverts.</p>
+      <a href="#localisation" class="hero-link">Nous trouver →</a>
+    </div>
+  </div>
+
+  <div class="hero-panel">
+    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80" alt="Assiette gastronomique du Jardin d'Émile" width="800" height="1200">
+    <div class="hero-panel-content">
+      <p class="hero-label">Toute l'année</p>
+      <h2 class="hero-title">Les menus</h2>
+      <p class="hero-text">Des formules déjeuner aux menus du soir, une carte qui évolue au fil des arrivages.</p>
+      <a href="menus.html" class="hero-link">Voir les menus →</a>
+    </div>
+  </div>
+
+  <div class="hero-panel">
+    <img src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=800&q=80" alt="Table dressée pour une soirée au Jardin d'Émile" width="800" height="1200">
+    <div class="hero-panel-content">
+      <p class="hero-label">Votre table</p>
+      <h2 class="hero-title">Réserver</h2>
+      <p class="hero-text">En quelques secondes. Confirmation écrite par notre équipe sous 24h.</p>
+      <a href="reservation.html" class="hero-link">Réserver maintenant →</a>
+    </div>
+  </div>
+</div>
+
+<section class="actus-section" id="actus">
+  <div class="container">
+    <div class="actus-header reveal">
+      <div>
+        <p class="section-label">En ce moment</p>
+        <h2 class="section-title">Actualités</h2>
+        <div class="trait"></div>
+      </div>
+    </div>
+    <div class="actus-grid" id="actusGrid">
+      <div class="actu-card loading">Chargement des actualités…</div>
+    </div>
+  </div>
+</section>
+
+<section class="horaires-section">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Quand nous rendre visite</p>
+      <h2 class="section-title">Horaires</h2>
+      <div class="trait"></div>
+    </div>
+    <div class="horaires-grid">
+      <div class="horaire-bloc reveal">
+        <p class="horaire-jour">Lundi — Mardi</p>
+        <p class="horaire-ferme">Fermé</p>
+      </div>
+      <div class="horaire-bloc reveal">
+        <p class="horaire-jour">Mercredi — Vendredi</p>
+        <p class="horaire-heure">12h00 – 14h00<br>19h00 – 21h30</p>
+      </div>
+      <div class="horaire-bloc reveal">
+        <p class="horaire-jour">Samedi — Dimanche</p>
+        <p class="horaire-heure">12h00 – 14h30<br>19h00 – 22h00</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="formules-section" id="formules">
+  <div class="container">
+    <div class="formules-intro reveal">
+      <div>
+        <p class="section-label">Ce que nous proposons</p>
+        <h2 class="section-title">Nos <em>formules</em></h2>
+        <div class="trait"></div>
+      </div>
+      <p class="formules-intro-text">Des formules pensées pour chaque moment — un déjeuner en semaine, un dîner en amoureux ou une célébration en famille. Chaque assiette est construite autour des arrivages du marché. <a href="menus.html" style="color:var(--vert); border-bottom:1px solid var(--vert); font-size:12px; letter-spacing:0.06em; transition:color 0.3s, border-color 0.3s;" onmouseover="this.style.color='var(--terra)'; this.style.borderColor='var(--terra)'" onmouseout="this.style.color='var(--vert)'; this.style.borderColor='var(--vert)'">Voir tous les menus →</a></p>
+    </div>
+    <div class="formules-grid">
+      <div class="formule-card reveal">
+        <p class="formule-tag">Midi semaine</p>
+        <h3 class="formule-nom">La Brasserie</h3>
+        <p class="formule-prix">18€ <span>/ pers.</span></p>
+        <p class="formule-desc">Une formule généreuse pour le déjeuner, avec des plats du marché préparés chaque matin.</p>
+        <ul class="formule-services">
+          <li>Entrée + plat ou plat + dessert</li>
+          <li>Café offert</li>
+          <li>Mercredi au vendredi midi</li>
+        </ul>
+        <a href="menus.html" class="btn btn-outline-vert">Voir le menu →</a>
+      </div>
+      <div class="formule-card featured reveal">
+        <p class="formule-tag">Notre signature</p>
+        <h3 class="formule-nom">Le Jardin</h3>
+        <p class="formule-prix">38€ <span>/ pers.</span></p>
+        <p class="formule-desc">Le cœur de notre cuisine. Trois temps autour des saisons et des producteurs du Morbihan.</p>
+        <ul class="formule-services">
+          <li>Entrée, plat, dessert</li>
+          <li>Accords mets & vins disponibles</li>
+          <li>Tous services</li>
+        </ul>
+        <a href="reservation.html" class="btn btn-outline">Réserver →</a>
+      </div>
+      <div class="formule-card reveal">
+        <p class="formule-tag">Expérience complète</p>
+        <h3 class="formule-nom">Le Prestige</h3>
+        <p class="formule-prix">58€ <span>/ pers.</span></p>
+        <p class="formule-desc">Cinq temps pour une soirée mémorable. Le chef compose votre menu selon les arrivages du jour.</p>
+        <ul class="formule-services">
+          <li>5 services dégustation</li>
+          <li>Accord vins inclus</li>
+          <li>Sur réservation uniquement</li>
+        </ul>
+        <a href="reservation.html" class="btn btn-vert">Réserver →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="galerie-section">
+  <div class="galerie-strip">
+    <div class="galerie-item">
+      <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=900&q=80" alt="Cuisine du Jardin d'Émile" width="900" height="460" loading="lazy">
+    </div>
+    <div class="galerie-item">
+      <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3b28?w=600&q=80" alt="Plat signature du Jardin d'Émile" width="600" height="460" loading="lazy">
+    </div>
+    <div class="galerie-item">
+      <img src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=600&q=80" alt="Dessert du Jardin d'Émile" width="600" height="460" loading="lazy">
+    </div>
+    <div class="galerie-item">
+      <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=700&q=80" alt="Salle intimiste du Jardin d'Émile" width="700" height="460" loading="lazy">
+    </div>
+  </div>
+</div>
+
+<section id="presentation-section" class="presentation-section">
+  <div class="container">
+    <div class="presentation-inner">
+      <div class="presentation-img-wrap reveal">
+        <img src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?w=700&q=80" alt="Le chef du Jardin d'Émile en cuisine" width="700" height="460" loading="lazy">
+      </div>
+      <div>
+        <p class="section-label reveal">Notre philosophie</p>
+        <h2 class="section-title reveal">Une cuisine <em>ancrée</em><br>en Bretagne</h2>
+        <div class="trait reveal"></div>
+        <p class="presentation-texte reveal">Le Jardin d'Émile est né d'une conviction simple : la meilleure cuisine part du marché, pas du congélateur. Chaque semaine, Émile compose sa carte selon les arrivages de ses producteurs de confiance — maraîchers du Morbihan, pêcheurs locaux, éleveurs de la région.</p>
+        <p class="presentation-texte reveal">Le cadre, une maison de caractère au cœur de Malestroit, accueille une vingtaine de couverts dans une atmosphère intime et sans chichis. On vient ici pour manger bien, pas pour faire semblant.</p>
+        <a href="reservation.html" class="btn btn-vert reveal" style="margin-top:8px;">Réserver une table →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="avis-section">
+  <div class="container">
+    <p class="section-label reveal">Ce qu'ils en disent</p>
+    <h2 class="section-title reveal">Avis <em>Google</em></h2>
+    <div class="trait reveal"></div>
+    <div class="avis-grid">
+      <div class="avis-card reveal">
+        <div class="avis-etoiles">
+          <div class="etoile"></div><div class="etoile"></div><div class="etoile"></div><div class="etoile"></div><div class="etoile"></div>
+        </div>
+        <p class="avis-texte">« Une cuisine authentique, des produits remarquables. On sent que chaque plat est pensé avec soin. Une adresse à ne pas manquer en Bretagne. »</p>
+        <p class="avis-auteur">— Marie-Claire T.</p>
+      </div>
+      <div class="avis-card reveal">
+        <div class="avis-etoiles">
+          <div class="etoile"></div><div class="etoile"></div><div class="etoile"></div><div class="etoile"></div><div class="etoile"></div>
+        </div>
+        <p class="avis-texte">« Cadre intimiste, service attentionné et assiettes bluffantes. La formule dégustation vaut chaque centime. On revient très vite. »</p>
+        <p class="avis-auteur">— Thomas B.</p>
+      </div>
+      <div class="avis-card reveal">
+        <div class="avis-etoiles">
+          <div class="etoile"></div><div class="etoile"></div><div class="etoile"></div><div class="etoile"></div><div class="etoile"></div>
+        </div>
+        <p class="avis-texte">« Le meilleur restaurant de Malestroit sans hésitation. La cuisine du marché exécutée avec une précision et une générosité rares. »</p>
+        <p class="avis-auteur">— Sophie L.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="localisation-section" id="localisation">
+  <div class="localisation-inner">
+    <div class="localisation-infos">
+      <p class="section-label">Où nous trouver</p>
+      <h2 class="section-title">Malestroit,<br><em>Morbihan</em></h2>
+      <div class="trait"></div>
+      <div class="info-ligne">
+        <p class="info-label">Adresse</p>
+        <p class="info-valeur">12 Place du Bouffay<br>56140 Malestroit</p>
+      </div>
+      <div class="info-ligne">
+        <p class="info-label">Téléphone</p>
+        <p class="info-valeur">02 97 75 XX XX</p>
+      </div>
+      <div class="info-ligne">
+        <p class="info-label">Email</p>
+        <p class="info-valeur">contact@jardindémile.fr</p>
+      </div>
+      <a href="reservation.html" class="btn btn-outline" style="margin-top:8px; align-self:flex-start;">Réserver une table →</a>
+    </div>
+    <div class="localisation-carte">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10899.07!2d-2.3925!3d47.8134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48101b5c5f7d8a3d%3A0xa12b5e7c3f1d2e8f!2sMalestroit%2C%2056140!5e0!3m2!1sfr!2sfr!4v1700000000000"
+        width="100%" height="440"
+        style="border:0; display:block;"
+        allowfullscreen=""
+        loading="lazy"
+        title="Localisation Le Jardin d'Émile, Malestroit, Morbihan">
+      </iframe>
+    </div>
+  </div>
+</div>
+
+<section class="cta-section">
+  <p class="section-label" style="text-align:center;">Prêt à nous rendre visite ?</p>
+  <h2 class="cta-titre reveal">Réservez<br><em>votre table</em></h2>
+  <p class="cta-sous reveal">Disponible en ligne, 7j/7, en quelques secondes.</p>
+  <a href="reservation.html" class="btn btn-vert reveal">Réserver maintenant →</a>
+  <span class="cta-note">Confirmation écrite par notre équipe sous 24h</span>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <p class="footer-logo">Le Jardin d'Émile</p>
+      <p class="footer-tagline">Cuisine de saison au cœur de Malestroit.<br>Producteurs bretons, assiettes sincères.</p>
+    </div>
+    <div>
+      <p class="footer-col-titre">Navigation</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="menus.html">Menus</a></li>
+        <li><a href="reservation.html">Réserver</a></li>
+        <li><a href="#localisation">Nous trouver</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-titre">Contact</p>
+      <ul class="footer-links">
+        <li><a href="tel:0297750000">02 97 75 XX XX</a></li>
+        <li><a href="mailto:contact@jardindémile.fr">contact@jardindémile.fr</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Le Jardin d'Émile — Tous droits réservés</p>
+    <p class="footer-copy">Site réalisé par <a href="https://comeup.com/fr/@s7vnstudio">Amiri Studio</a></p>
+  </div>
+</footer>
+
+<script>
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+const hamburger = document.getElementById('hamburger');
+const mobMenu = document.getElementById('mobMenu');
+const mobClose = document.getElementById('mobClose');
+
+hamburger.addEventListener('click', () => mobMenu.classList.add('open'));
+mobClose.addEventListener('click', () => mobMenu.classList.remove('open'));
+mobMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => mobMenu.classList.remove('open')));
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import { getFirestore, collection, query, orderBy, limit, getDocs } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAIRzwxRIZbvUV7EWHwGEdHDPKdrW6UFhA",
+  authDomain: "jardin-emile.firebaseapp.com",
+  projectId: "jardin-emile",
+  storageBucket: "jardin-emile.firebasestorage.app",
+  messagingSenderId: "541652042818",
+  appId: "1:541652042818:web:e01e494f6c3ee323c799db"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function chargerActus() {
+  const grid = document.getElementById('actusGrid');
+  try {
+    const q = query(collection(db, "actualites"), orderBy("date", "desc"), limit(3));
+    const snap = await getDocs(q);
+    if (snap.empty) {
+      grid.innerHTML = '<div class="actu-vide">Aucune actualité pour le moment.</div>';
+      return;
+    }
+    grid.innerHTML = '';
+    snap.forEach(doc => {
+      const d = doc.data();
+      const dateStr = d.date?.toDate
+        ? d.date.toDate().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })
+        : '';
+      const card = document.createElement('div');
+      card.className = 'actu-card reveal';
+      card.innerHTML = `<p class="actu-date">${dateStr}</p><h3 class="actu-titre">${d.titre || ''}</h3><p class="actu-texte">${d.texte || ''}</p>`;
+      grid.appendChild(card);
+      revealObserver.observe(card);
+    });
+  } catch(err) {
+    grid.innerHTML = '<div class="actu-vide">Actualités temporairement indisponibles.</div>';
+  }
+}
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1 });
+
+chargerActus();
+</script>
+
+</body>
+</html>

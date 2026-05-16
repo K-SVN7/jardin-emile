@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menus — Le Jardin d'Émile, Restaurant à Malestroit</title>
+<meta name="description" content="Découvrez les menus du Jardin d'Émile : formules déjeuner, menu signature et menu dégustation. Cuisine de saison, produits locaux du Morbihan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blanc: #FAF7F2;
+  --blanc-pur: #FFFFFF;
+  --vert: #2C3E2D;
+  --vert-clair: #3D5440;
+  --vert-pale: #EEF1EE;
+  --terra: #C17A5A;
+  --texte: #1A1A1A;
+  --texte-doux: #555550;
+  --f-titre: 'Cormorant Garamond', serif;
+  --f-corps: 'Inter', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--blanc);
+  color: var(--texte);
+  font-family: var(--f-corps);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 72px;
+  background: rgba(250,247,242,0.96);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 1px 0 rgba(44,62,45,0.1);
+}
+
+.nav-logo {
+  font-family: var(--f-titre);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--vert);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--texte-doux);
+  transition: color 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active { color: var(--terra); }
+
+.nav-reserver {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blanc) !important;
+  background: var(--vert);
+  padding: 10px 22px;
+  border: 1px solid var(--vert);
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.nav-reserver:hover {
+  background: var(--terra) !important;
+  border-color: var(--terra) !important;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+
+.hamburger span {
+  width: 24px;
+  height: 1px;
+  background: var(--vert);
+  display: block;
+}
+
+.mob-menu {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--vert);
+  z-index: 99;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.mob-menu.open { display: flex; }
+
+.mob-menu a {
+  font-family: var(--f-titre);
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--blanc);
+  letter-spacing: 0.04em;
+  transition: color 0.3s;
+}
+
+.mob-menu a:hover { color: var(--terra); }
+
+.mob-close {
+  position: absolute;
+  top: 24px; right: 28px;
+  font-size: 32px;
+  color: var(--blanc);
+  cursor: pointer;
+  background: none;
+  border: none;
+  line-height: 1;
+  font-weight: 300;
+}
+
+.page-hero {
+  padding-top: 72px;
+  height: 52vh;
+  min-height: 340px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.page-hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(44,62,45,0.2), rgba(26,26,26,0.65));
+  z-index: 1;
+}
+
+.page-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 48px 52px;
+  max-width: 1140px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.page-hero-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(250,247,242,0.6);
+  margin-bottom: 12px;
+}
+
+.page-hero-titre {
+  font-family: var(--f-titre);
+  font-size: clamp(48px, 6vw, 80px);
+  font-weight: 300;
+  color: var(--blanc);
+  line-height: 1.0;
+}
+
+.page-hero-titre em { font-style: italic; }
+
+.menus-nav {
+  background: var(--blanc-pur);
+  border-bottom: 1px solid rgba(44,62,45,0.1);
+  position: sticky;
+  top: 72px;
+  z-index: 50;
+}
+
+.menus-nav-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: flex;
+  gap: 0;
+}
+
+.menu-tab {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--texte-doux);
+  padding: 18px 28px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.3s, border-color 0.3s;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: var(--f-corps);
+}
+
+.menu-tab:hover { color: var(--vert); }
+.menu-tab.active { color: var(--vert); border-bottom-color: var(--terra); }
+
+.container { max-width: 1140px; margin: 0 auto; padding: 0 48px; }
+
+.section-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-family: var(--f-titre);
+  font-size: clamp(36px, 4vw, 54px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--vert);
+  margin-bottom: 20px;
+}
+
+.section-title em { font-style: italic; }
+
+.trait {
+  width: 36px;
+  height: 1px;
+  background: var(--terra);
+  margin-bottom: 40px;
+}
+
+.menu-section {
+  padding: 80px 0;
+  display: none;
+}
+
+.menu-section.active { display: block; }
+
+.menu-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 96px;
+  align-items: start;
+  margin-bottom: 64px;
+}
+
+.menu-intro-text {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--texte-doux);
+  line-height: 1.85;
+}
+
+.menu-prix-bloc {
+  border-left: 1px solid rgba(44,62,45,0.12);
+  padding-left: 40px;
+}
+
+.menu-prix-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--texte-doux);
+  margin-bottom: 8px;
+}
+
+.menu-prix-valeur {
+  font-family: var(--f-titre);
+  font-size: 52px;
+  font-weight: 300;
+  color: var(--vert);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.menu-prix-valeur span { font-size: 18px; opacity: 0.5; }
+
+.menu-prix-note {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--texte-doux);
+  font-style: italic;
+  margin-bottom: 28px;
+  margin-top: 6px;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  border: 1px solid rgba(44,62,45,0.1);
+}
+
+.menu-categorie {
+  padding: 40px 36px;
+  border-right: 1px solid rgba(44,62,45,0.1);
+}
+
+.menu-categorie:last-child { border-right: none; }
+
+.menu-cat-titre {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(44,62,45,0.1);
+}
+
+.plat {
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(44,62,45,0.06);
+}
+
+.plat:last-child { border-bottom: none; }
+
+.plat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 5px;
+}
+
+.plat-nom {
+  font-family: var(--f-titre);
+  font-size: 19px;
+  font-weight: 400;
+  color: var(--vert);
+  line-height: 1.2;
+}
+
+.plat-prix {
+  font-family: var(--f-titre);
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--terra);
+  white-space: nowrap;
+}
+
+.plat-desc {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--texte-doux);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.plat-allergenes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 7px;
+}
+
+.allergene {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--texte-doux);
+  background: var(--vert-pale);
+  padding: 2px 7px;
+}
+
+.menu-image-strip {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  height: 300px;
+  gap: 2px;
+}
+
+.menu-img-item { overflow: hidden; }
+
+.menu-img-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.menu-img-item:hover img { transform: scale(1.05); }
+
+.degustation-timeline {
+  position: relative;
+  padding-left: 48px;
+}
+
+.degustation-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--terra), rgba(193,122,90,0.15));
+}
+
+.degustation-etape {
+  position: relative;
+  padding: 0 0 48px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.degustation-etape:last-child { padding-bottom: 0; }
+
+.degustation-etape::before {
+  content: '';
+  position: absolute;
+  left: -48px;
+  top: 8px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--terra);
+  transform: translateX(-3px);
+}
+
+.etape-num {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 8px;
+}
+
+.etape-nom {
+  font-family: var(--f-titre);
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--vert);
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+
+.etape-desc {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--texte-doux);
+  line-height: 1.75;
+}
+
+.etape-img {
+  overflow: hidden;
+}
+
+.etape-img img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  transition: transform 0.6s;
+}
+
+.etape-img:hover img { transform: scale(1.04); }
+
+.accord-bloc {
+  margin-top: 56px;
+  background: var(--vert);
+  padding: 44px 48px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: center;
+}
+
+.accord-texte-titre {
+  font-family: var(--f-titre);
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--blanc);
+  margin-bottom: 10px;
+}
+
+.accord-texte-desc {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(250,247,242,0.6);
+  line-height: 1.7;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--f-corps);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+}
+
+.btn-vert { background: var(--vert); color: var(--blanc); border: 1px solid var(--vert); }
+.btn-vert:hover { background: var(--terra); border-color: var(--terra); }
+
+.btn-outline { background: transparent; color: var(--blanc); border: 1px solid rgba(250,247,242,0.4); }
+.btn-outline:hover { background: var(--blanc); color: var(--vert); border-color: var(--blanc); }
+
+.btn-outline-vert { background: transparent; color: var(--vert); border: 1px solid var(--vert); }
+.btn-outline-vert:hover { background: var(--vert); color: var(--blanc); }
+
+.note-saison {
+  margin-top: 56px;
+  padding: 32px 36px;
+  border-left: 2px solid var(--terra);
+  background: var(--vert-pale);
+}
+
+.note-saison p {
+  font-family: var(--f-titre);
+  font-size: 17px;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--texte);
+  line-height: 1.7;
+}
+
+.note-saison span {
+  display: block;
+  font-family: var(--f-corps);
+  font-size: 11px;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-top: 10px;
+}
+
+.cta-section {
+  background: var(--blanc-pur);
+  text-align: center;
+  padding: 96px 48px;
+}
+
+.cta-titre {
+  font-family: var(--f-titre);
+  font-size: clamp(40px, 5vw, 68px);
+  font-weight: 300;
+  color: var(--vert);
+  line-height: 1.05;
+  margin-bottom: 18px;
+}
+
+.cta-titre em { font-style: italic; }
+
+.cta-sous {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--texte-doux);
+  margin-bottom: 32px;
+}
+
+.cta-note {
+  display: block;
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--texte-doux);
+  margin-top: 14px;
+  font-style: italic;
+  letter-spacing: 0.06em;
+}
+
+footer {
+  background: var(--vert);
+  padding: 56px 48px 32px;
+}
+
+.footer-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(250,247,242,0.1);
+  margin-bottom: 28px;
+}
+
+.footer-logo {
+  font-family: var(--f-titre);
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--blanc);
+  margin-bottom: 14px;
+}
+
+.footer-tagline {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(250,247,242,0.45);
+  line-height: 1.7;
+}
+
+.footer-col-titre {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(250,247,242,0.35);
+  margin-bottom: 18px;
+}
+
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 10px; }
+
+.footer-links a {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(250,247,242,0.6);
+  transition: color 0.3s;
+}
+
+.footer-links a:hover { color: var(--terra); }
+
+.footer-bottom {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-copy {
+  font-size: 11px;
+  font-weight: 300;
+  color: rgba(250,247,242,0.25);
+  letter-spacing: 0.05em;
+}
+
+.footer-copy a { color: rgba(250,247,242,0.35); transition: color 0.3s; }
+.footer-copy a:hover { color: var(--terra); }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: opacity, transform;
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 1024px) {
+  nav { padding: 0 28px; }
+  .container { padding: 0 28px; }
+  .page-hero-content { padding: 0 28px 48px; }
+  .menus-nav-inner { padding: 0 28px; }
+  .menu-grid { grid-template-columns: 1fr 1fr; }
+  .menu-categorie:last-child { grid-column: span 2; border-right: none; border-top: 1px solid rgba(44,62,45,0.1); }
+  .menu-intro { grid-template-columns: 1fr; gap: 36px; }
+  .menu-prix-bloc { border-left: none; padding-left: 0; border-top: 1px solid rgba(44,62,45,0.1); padding-top: 32px; }
+  .degustation-etape { grid-template-columns: 1fr; gap: 24px; }
+  .menu-image-strip { grid-template-columns: 1fr 1fr; }
+  .menu-image-strip .menu-img-item:last-child { display: none; }
+  .accord-bloc { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  nav { padding: 0 20px; height: 60px; }
+  .container { padding: 0 20px; }
+  .page-hero-content { padding: 0 20px 40px; }
+  .menus-nav-inner { padding: 0 20px; overflow-x: auto; }
+  .menu-tab { padding: 16px 18px; white-space: nowrap; }
+  .nav-links { display: none; }
+  .nav-reserver { display: none; }
+  .hamburger { display: flex; }
+  .menu-grid { grid-template-columns: 1fr; }
+  .menu-categorie { border-right: none; border-bottom: 1px solid rgba(44,62,45,0.1); }
+  .menu-categorie:last-child { grid-column: span 1; border-top: none; }
+  .degustation-timeline { padding-left: 28px; }
+  .degustation-etape::before { left: -28px; }
+  .menu-image-strip { grid-template-columns: 1fr; height: 220px; }
+  .menu-image-strip .menu-img-item:not(:first-child) { display: none; }
+  .accord-bloc { padding: 32px 24px; }
+  .footer-inner { grid-template-columns: 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+  footer { padding: 48px 20px 28px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Le Jardin d'Émile</a>
+  <ul class="nav-links">
+    <li><a href="index.html#actus">Actualités</a></li>
+    <li><a href="index.html#formules">Formules</a></li>
+    <li><a href="menus.html" class="active">Menus</a></li>
+    <li><a href="index.html#localisation">Nous trouver</a></li>
+    <li><a href="reservation.html" class="nav-reserver">Réserver</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" id="mobClose" aria-label="Fermer le menu">&times;</button>
+  <a href="index.html#actus">Actualités</a>
+  <a href="index.html#formules">Formules</a>
+  <a href="menus.html">Menus</a>
+  <a href="index.html#localisation">Nous trouver</a>
+  <a href="reservation.html">Réserver</a>
+</div>
+
+<div class="page-hero">
+  <img class="page-hero-img" src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3b28?w=1400&q=85" alt="Plats du Jardin d'Émile" width="1400" height="600">
+  <div class="page-hero-content">
+    <p class="page-hero-label">Cuisine de saison</p>
+    <h1 class="page-hero-titre">Nos <em>menus</em></h1>
+  </div>
+</div>
+
+<div class="menus-nav">
+  <div class="menus-nav-inner">
+    <button class="menu-tab active" data-target="brasserie">La Brasserie</button>
+    <button class="menu-tab" data-target="jardin">Le Jardin</button>
+    <button class="menu-tab" data-target="prestige">Le Prestige</button>
+  </div>
+</div>
+
+<div id="brasserie" class="menu-section active">
+  <div class="container">
+    <div class="menu-intro reveal">
+      <div>
+        <p class="section-label">Midi — Mercredi au vendredi</p>
+        <h2 class="section-title">La <em>Brasserie</em></h2>
+        <div class="trait"></div>
+        <p class="menu-intro-text">Une formule généreuse et sans chichis, conçue pour le déjeuner en semaine. Les plats changent chaque jour selon les arrivages du matin. Simple, bien fait, avec des produits qu'on connaît par leur nom.</p>
+      </div>
+      <div class="menu-prix-bloc">
+        <p class="menu-prix-label">Formule complète</p>
+        <p class="menu-prix-valeur">18€ <span>/ pers.</span></p>
+        <p class="menu-prix-note">Entrée + plat ou plat + dessert — café offert</p>
+        <a href="reservation.html" class="btn btn-vert">Réserver →</a>
+      </div>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-categorie reveal">
+        <p class="menu-cat-titre">Entrées</p>
+        <div class="plat">
+          <div class="plat-header">
+            <p class="plat-nom">Velouté de butternut</p>
+            <p class="plat-prix">—</p>
+          </div>
+          <p class="plat-desc">Crème de courge rôtie, huile de noisette, chips de sauge</p>
+          <div class="plat-allergenes">
+            <span class="allergene">Lait</span>
+            <span class="allergene">Fruits à coque</span>
+          </div>
+        </div>
+        <div class="plat">
+          <div class="plat-header">
+            <p class="plat-nom">Terrine de campagne</p>
+            <p class="plat-prix">—</p>
+          </div>
+          <p class="plat-desc">Terrine maison, cornichons au vinaigre de cidre, pain de campagne grillé</p>
+          <div class="plat-allergenes">
+            <span class="allergene">Gluten</span>
+            <span class="allergene">Œufs</span>
+          </div>
+        </div>
+        <div class="plat">
+          <div class="plat-header">
+            <p class="plat-nom">Salade de betteraves</p>
+            <p class="plat-prix">—</p>
+          </div>
+          <p class="plat-desc">Betteraves rôties et crues, chèvre frais, vinaigrette à l'orange</p>
+          <div class="plat-allergenes">
+            <span class="allergene">Lait</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-categorie reveal">
+        <p class="menu-cat-titre">Plats</p>
+        <div class="plat">
+          <div class="plat-header">
+            <p class="plat-nom">Lieu jaune de ligne</p>
+            <p class="plat-prix">—</p>
+          </div>
+          <p class="plat-desc">Poché au court-bouillon, beurre blanc aux herbes, légumes vapeur du maraîcher</p>
+          <div class="plat-allergenes">
+            <span class="allergene">Poisson</span>
+            <span class="allergene">Lait</span>
+          </div>
+        </div>
+        <div class="plat">
+          <div class="plat-header">
+            <p class="plat-nom">Joue de porc braisée</p>
+            <p class="plat-prix">—</p>
+          </div>
+          <p class="plat-desc">Braisée 6 heures au cidre breton, purée de céleri, jus corsé</p>
+          <div class="plat-allergenes">
+            <span class="allergene">Lait</span>
+            <span class="allergene">Céleri</span>
+          </div>
+        </div>
+        <div class="plat">
+          <div class="plat-header">
+            <p class="plat-nom">Risotto aux champignons</p>
+            <p class="plat-prix">—</p>
+          </div>
+          <p class="plat-desc">Pleurotes et shiitake de Bretagne, parmesan 24 mois, huile de truffe</p>
+          <div class="plat-allergenes">
+            <span class="allergene">Lait</span>
+            <span class="allergene">Gluten</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-categorie reveal">
+        <p class="menu-cat-titre">Desserts</p>
+        <div class="plat">
+          <div class="plat-header">
+            <p class="plat-nom">Île flottante</p>
+            <p class="plat-prix">—</p>
+          </div>
+          <p class="plat-desc">Blancs en neige, crème anglaise à la vanille de Madagascar, caramel beurre salé</p>
+          <div class="plat-allergenes">
+            <span class="allergene">Œufs</span>
+            <span class="allergene">Lait</span>
+          </div>
+        </div>
+        <div class="plat">
+          <div class="plat-header">
+            <p class="plat-nom">Tarte fine aux pommes</p>
+            <p class="plat-prix">—</p>
+          </div>
+          <p class="plat-desc">Pâte feuilletée maison, pommes du verger, calvados, crème fraîche</p>
+          <div class="plat-allergenes">
+            <span class="allergene">Gluten</span>
+            <span class="allergene">Lait</span>
+            <span class="allergene">Œufs</span>
+          </div>
+        </div>
+        <div class="plat">
+          <div class="plat-header">
+            <p class="plat-nom">Fromages affinés</p>
+            <p class="plat-prix">—</p>
+          </div>
+          <p class="plat-desc">Sélection de fromages bretons, confiture de figues maison, pain aux noix</p>
+          <div class="plat-allergenes">
+            <span class="allergene">Lait</span>
+            <span class="allergene">Gluten</span>
+            <span class="allergene">Fruits à coque</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-saison reveal">
+      <p>La carte de midi évolue chaque semaine selon les arrivages du marché et les saisons. Les plats présentés sont indicatifs.</p>
+      <span>— Émile, chef du Jardin d'Émile</span>
+    </div>
+  </div>
+</div>
+
+<div id="jardin" class="menu-section">
+  <div class="container">
+    <div class="menu-intro reveal">
+      <div>
+        <p class="section-label">Déjeuner & dîner — Tous services</p>
+        <h2 class="section-title">Le <em>Jardin</em></h2>
+        <div class="trait"></div>
+        <p class="menu-intro-text">Le menu signature du restaurant. Trois temps construits autour d'un produit phare de saison, travaillé de l'entrée au dessert. La carte change toutes les six semaines, au rythme des marchés du Morbihan.</p>
+      </div>
+      <div class="menu-prix-bloc">
+        <p class="menu-prix-label">Menu 3 temps</p>
+        <p class="menu-prix-valeur">38€ <span>/ pers.</span></p>
+        <p class="menu-prix-note">Entrée — plat — dessert</p>
+        <p class="menu-prix-label" style="margin-top:16px;">Accord mets & vins</p>
+        <p class="menu-prix-valeur" style="font-size:32px;">+18€ <span>/ pers.</span></p>
+        <p class="menu-prix-note">3 verres sélectionnés par le chef</p>
+        <a href="reservation.html" class="btn btn-vert" style="margin-top:8px;">Réserver →</a>
+      </div>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-categorie reveal">
+        <p class="menu-cat-titre">Entrée</p>
+        <div class="plat">
+          <div class="plat-header">
+            <p class="plat-nom">Noix de Saint-Jacques</p>
+            <p class="plat-prix">—</p>
+          </div>
+          <p class="plat-desc">Juste saisies, émulsion de topinambour fumé, huile verte de persil plat, caviar d'aquitaine</p>
+          <div class="plat-allergenes">
+            <span class="allergene">Mollusques</span>
+            <span class="allergene">Lait</span>
+          </div>
+        </div>
+        <div class="plat">
+          <div class="plat-header">
+            <p class="plat-nom">Foie gras de canard</p>
+            <p class="plat-prix">—</p>
+          </div>
+          <p class="plat-desc">Mi-cuit au torchon, chutney de poire et gingembre, brioche toastée, fleur de sel</p>
+          <div class="plat-allergenes">
+            <span class="allergene">Gluten</span>
+            <span class="allergene">Œufs</span>
+            <span class="allergene">Lait</span>
+          </div>
+        </div>
+        <div class="plat">
+          <div class="plat-header">
+            <p class="plat-nom">Carpaccio de daurade</p>
+            <p class="plat-prix">—</p>
+          </div>
+          <p class="plat-desc">Mariné au citron vert et yuzu, fenouil effilé, granola salé aux algues</p>
+          <div class="plat-allergenes">
+            <span class="allergene">Poisson</span>
+            <span class="allergene">Fruits à coque</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-categorie reveal">
+        <p class="menu-cat-titre">Plat</p>
+        <div class="plat">
+          <div class="plat-header">
+            <p class="plat-nom">Filet de bar sauvage</p>
+            <p class="plat-prix">—</p>
+          </div>
+          <p class="plat-desc">Peau croustillante, vierge d'herbes fraîches, artichaut barigoule, jus de crustacés réduit</p>
+          <div class="plat-allergenes">
+            <span class="allergene">Poisson</span>
+            <span class="allergene">Crustacés</span>
+          </div>
+        </div>
+        <div class="plat">
+          <div class="plat-header">
+            <p class="plat-nom">Agneau du Morbihan</p>
+            <p class="plat-prix">—</p>
+          </div>
+          <p class="plat-desc">Carré rôti, jus au romarin, gratin dauphinois, condiment d'olives vertes et citron confit</p>
+          <div class="plat-allergenes">
+            <span class="allergene">Lait</span>
+            <span class="allergene">Œufs</span>
+          </div>
+        </div>
+        <div class="plat">
+          <div class="plat-header">
+            <p class="plat-nom">Pigeon rôti entier</p>
+            <p class="plat-prix">—</p>
+          </div>
+          <p class="plat-desc">Farci aux herbes et foie gras, jus au porto, mousseline de pois chiches, pickles de légumes</p>
+          <div class="plat-allergenes">
+            <span class="allergene">Lait</span>
+            <span class="allergene">Alcool</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-categorie reveal">
+        <p class="menu-cat-titre">Dessert</p>
+        <div class="plat">
+          <div class="plat-header">
+            <p class="plat-nom">Soufflé au chocolat</p>
+            <p class="plat-prix">—</p>
+          </div>
+          <p class="plat-desc">Grand Cru Pérou 72%, glace vanille bourbon, tuile au cacao</p>
+          <div class="plat-allergenes">
+            <span class="allergene">Œufs</span>
+            <span class="allergene">Lait</span>
+            <span class="allergene">Gluten</span>
+          </div>
+        </div>
+        <div class="plat">
+          <div class="plat-header">
+            <p class="plat-nom">Vacherin revisité</p>
+            <p class="plat-prix">—</p>
+          </div>
+          <p class="plat-desc">Meringue française, sorbet fraise-rhubarbe, chantilly légère au basilic</p>
+          <div class="plat-allergenes">
+            <span class="allergene">Œufs</span>
+            <span class="allergene">Lait</span>
+          </div>
+        </div>
+        <div class="plat">
+          <div class="plat-header">
+            <p class="plat-nom">Assiette de saison</p>
+            <p class="plat-prix">—</p>
+          </div>
+          <p class="plat-desc">Composition autour d'un fruit du moment, textures et températures contrastées</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-image-strip">
+      <div class="menu-img-item">
+        <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=700&q=80" alt="Plat signature Le Jardin d'Émile" width="700" height="300" loading="lazy">
+      </div>
+      <div class="menu-img-item">
+        <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&q=80" alt="Dressage en cuisine" width="600" height="300" loading="lazy">
+      </div>
+      <div class="menu-img-item">
+        <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80" alt="Dessert gastronomique" width="600" height="300" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="prestige" class="menu-section">
+  <div class="container">
+    <div class="menu-intro reveal">
+      <div>
+        <p class="section-label">Expérience complète — Sur réservation</p>
+        <h2 class="section-title">Le <em>Prestige</em></h2>
+        <div class="trait"></div>
+        <p class="menu-intro-text">Cinq temps pour une soirée mémorable. Le chef compose votre menu le matin même, autour des arrivages du jour. Une expérience construite pour vous, pas pour une carte figée. Chaque service raconte quelque chose.</p>
+      </div>
+      <div class="menu-prix-bloc">
+        <p class="menu-prix-label">Menu 5 temps</p>
+        <p class="menu-prix-valeur">58€ <span>/ pers.</span></p>
+        <p class="menu-prix-note">Amuse-bouche inclus</p>
+        <p class="menu-prix-label" style="margin-top:16px;">Accord vins prestige</p>
+        <p class="menu-prix-valeur" style="font-size:32px;">+28€ <span>/ pers.</span></p>
+        <p class="menu-prix-note">5 verres sélectionnés, servis au moment</p>
+        <a href="reservation.html" class="btn btn-vert" style="margin-top:8px;">Réserver →</a>
+      </div>
+    </div>
+
+    <div class="degustation-timeline">
+      <div class="degustation-etape reveal">
+        <div>
+          <p class="etape-num">Mise en bouche</p>
+          <h3 class="etape-nom">L'accueil du chef</h3>
+          <p class="etape-desc">Deux ou trois bouchées pensées pour ouvrir le palais. Le ton est donné — ni lourd ni ostentatoire. Juste une intention, nette et précise.</p>
+        </div>
+        <div class="etape-img">
+          <img src="https://images.unsplash.com/photo-1484980972926-edee96e0960d?w=600&q=80" alt="Mise en bouche Le Prestige" width="600" height="240" loading="lazy">
+        </div>
+      </div>
+
+      <div class="degustation-etape reveal">
+        <div>
+          <p class="etape-num">Premier temps</p>
+          <h3 class="etape-nom">La mer</h3>
+          <p class="etape-desc">Un produit de la pêche locale travaillé avec délicatesse. Saint-Jacques, homard, bar ou daurade selon l'arrivage du matin — toujours le meilleur de ce que la rade a à offrir ce jour-là.</p>
+        </div>
+        <div class="etape-img">
+          <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600&q=80" alt="Premier temps - produit de la mer" width="600" height="240" loading="lazy">
+        </div>
+      </div>
+
+      <div class="degustation-etape reveal">
+        <div>
+          <p class="etape-num">Deuxième temps</p>
+          <h3 class="etape-nom">La terre</h3>
+          <p class="etape-desc">Un légume ou un produit végétal en vedette. Pas en accompagnement — en plat. La cuisine d'Émile défend l'idée que les légumes méritent autant d'attention que la viande.</p>
+        </div>
+        <div class="etape-img">
+          <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&q=80" alt="Deuxième temps - légumes de saison" width="600" height="240" loading="lazy">
+        </div>
+      </div>
+
+      <div class="degustation-etape reveal">
+        <div>
+          <p class="etape-num">Troisième temps</p>
+          <h3 class="etape-nom">La pièce</h3>
+          <p class="etape-desc">La pièce maîtresse du repas. Viande ou volaille travaillée avec ses jus, ses os, ses garnitures. Le plat autour duquel tout le reste est construit.</p>
+        </div>
+        <div class="etape-img">
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80" alt="Troisième temps - pièce de viande" width="600" height="240" loading="lazy">
+        </div>
+      </div>
+
+      <div class="degustation-etape reveal">
+        <div>
+          <p class="etape-num">Quatrième temps</p>
+          <h3 class="etape-nom">La douceur</h3>
+          <p class="etape-desc">Le dessert comme conclusion naturelle — pas comme une parenthèse sucrée obligatoire. Léger, précis, souvent autour d'un fruit ou d'un produit laitier local.</p>
+        </div>
+        <div class="etape-img">
+          <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80" alt="Dessert de dégustation" width="600" height="240" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+    <div class="accord-bloc reveal">
+      <div>
+        <p class="accord-texte-titre">L'accord vins Prestige</p>
+        <p class="accord-texte-desc">Cinq verres sélectionnés par Émile pour accompagner chaque temps du menu. Vins naturels, vignerons indépendants, quelques surprises. Servis au bon moment, pas tous à la fois.</p>
+      </div>
+      <a href="reservation.html" class="btn btn-outline">Réserver avec accord vins →</a>
+    </div>
+
+    <div class="note-saison reveal" style="margin-top: 40px;">
+      <p>Le menu Prestige est composé chaque matin selon les arrivages. Il n'existe pas de carte fixe — c'est précisément ce qui en fait l'intérêt. Disponible uniquement sur réservation, minimum 48h à l'avance.</p>
+      <span>— Émile, chef du Jardin d'Émile</span>
+    </div>
+  </div>
+</div>
+
+<section class="cta-section">
+  <p class="section-label" style="text-align:center;">Une table vous attend</p>
+  <h2 class="cta-titre reveal">Réservez<br><em>votre soirée</em></h2>
+  <p class="cta-sous reveal">En ligne, 7j/7. Confirmation écrite sous 24h.</p>
+  <a href="reservation.html" class="btn btn-vert reveal">Réserver maintenant →</a>
+  <span class="cta-note">La réservation est confirmée par écrit par notre équipe</span>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <p class="footer-logo">Le Jardin d'Émile</p>
+      <p class="footer-tagline">Cuisine de saison au cœur de Malestroit.<br>Producteurs bretons, assiettes sincères.</p>
+    </div>
+    <div>
+      <p class="footer-col-titre">Navigation</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="menus.html">Menus</a></li>
+        <li><a href="reservation.html">Réserver</a></li>
+        <li><a href="index.html#localisation">Nous trouver</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-titre">Contact</p>
+      <ul class="footer-links">
+        <li><a href="tel:0297750000">02 97 75 XX XX</a></li>
+        <li><a href="mailto:contact@jardindémile.fr">contact@jardindémile.fr</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Le Jardin d'Émile — Tous droits réservés</p>
+    <p class="footer-copy">Site réalisé par <a href="https://comeup.com/fr/@s7vnstudio">Amiri Studio</a></p>
+  </div>
+</footer>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const mobMenu = document.getElementById('mobMenu');
+const mobClose = document.getElementById('mobClose');
+
+hamburger.addEventListener('click', () => mobMenu.classList.add('open'));
+mobClose.addEventListener('click', () => mobMenu.classList.remove('open'));
+mobMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => mobMenu.classList.remove('open')));
+
+const tabs = document.querySelectorAll('.menu-tab');
+const sections = document.querySelectorAll('.menu-section');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    sections.forEach(s => s.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.target).classList.add('active');
+    document.querySelector('.menus-nav').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
+
+</body>
+</html>
